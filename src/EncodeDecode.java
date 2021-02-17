@@ -9,7 +9,7 @@ public class EncodeDecode {
 	public int[] stringToNumericalArray(String input) {
 		int[] output = new int[input.length()];
 		char character = input.charAt(0); // This gives the character 'a'
-		int ascii = (int) character;
+		//int ascii = (int) character;
 		System.out.println("Text to numerical vector: (Horizontally displayed to fit the console window)");
 		for (int i = 0; i < input.length(); i++) {
 			output[i] = input.charAt(i) - 64;
@@ -80,7 +80,35 @@ public class EncodeDecode {
 		return cipherText;
 	}
 	
-	public String decode(String input) {
-		return "";
+	public String decode(String encodedInput, int[][] KInverse) {
+		System.out.println("Received Message:");
+		System.out.println(encodedInput);
+		String deCodedMessage = "";
+		int r1 = 0, c1 = 0;
+        int r2 = 0, c2 = 0;
+        
+        int[] numericArray = stringToNumericalArray(encodedInput);
+        ArrayList<int[][]> diGraphList = vectorToMatrix(numericArray);
+        ArrayList<int[][]> transformedDiGraph = new ArrayList<int[][]>();
+        for (int[][] diGraph : diGraphList) {
+			r1 = KInverse.length;
+	        c1 = KInverse[0].length;
+	        c2 = diGraph[0].length;
+	        int[][] transformed = calculator.multiplyMatrices(KInverse, diGraph, r1, c1, c2);
+	        transformedDiGraph.add(transformed);
+		}
+		
+		for (int[][] diGraph : transformedDiGraph) {
+			for(int[] row : diGraph) {
+	            for (int column : row) {
+	            	column  = column % 27;
+	            	if (column == 0)
+	            		deCodedMessage = deCodedMessage + "-";
+	            	else 
+	            		deCodedMessage = deCodedMessage + (char) (column + 64);
+	            }
+	        }
+		}
+		return deCodedMessage;
 	}
 }
