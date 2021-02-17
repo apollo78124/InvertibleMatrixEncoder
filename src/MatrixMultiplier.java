@@ -14,8 +14,7 @@ public class MatrixMultiplier {
         return product;
     }
 
-    public void displayProduct(int[][] product) {
-        System.out.println("Product of two matrices is: ");
+    public void displayMatrix(int[][] product) {
         for(int[] row : product) {
             for (int column : row) {
                 System.out.print(column + "    ");
