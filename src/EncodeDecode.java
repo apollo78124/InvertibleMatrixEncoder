@@ -80,13 +80,13 @@ public class EncodeDecode {
 		return cipherText;
 	}
 	
-	public String decode(String encodedInput, int[][] KInverse) {
+	public String decode(String encodedInput, int[][] K) {
 		System.out.println("Received Message:");
 		System.out.println(encodedInput);
 		String deCodedMessage = "";
 		int r1 = 0, c1 = 0;
         int r2 = 0, c2 = 0;
-        
+        int[][] KInverse = calculator.inverseKey(K);
         int[] numericArray = stringToNumericalArray(encodedInput);
         ArrayList<int[][]> diGraphList = vectorToMatrix(numericArray);
         ArrayList<int[][]> transformedDiGraph = new ArrayList<int[][]>();

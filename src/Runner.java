@@ -24,9 +24,7 @@ public class Runner {
 		 */
 		System.out.println("\nReceiver Side:");
 		//Receive K from sender and inversed
-		int[][] KInverse = calculator.inverseKey(K);
-		calculator.inverseKey(K);
-		String deCodedText = encoder.decode(cipherText, KInverse);
+		String deCodedText = encoder.decode(cipherText, K);
 		System.out.println("\nDecoded Message:");
 		System.out.println(deCodedText);
     }
