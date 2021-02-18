@@ -22,4 +22,21 @@ public class MatrixMultiplier {
             System.out.println();
         }
     }
+    
+    public int[][] inverseKey(int[][] input) {
+    	int[][] output = new int[2][2];
+    	int det = input[0][0] * input[1][1] - input[0][1] * input[1][0];
+    	output[0][0] = input[1][1] * 25;
+    	output[0][1] = -input[0][1] * 25;
+    	output[1][0] = -input[1][0] * 25;
+    	output[1][1] = input[0][0] * 25;
+    	
+    	output[0][0] = Math.floorMod(output[0][0], 27);
+    	output[0][1] = Math.floorMod(output[0][1], 27);
+    	output[1][0] = Math.floorMod(output[1][0], 27);
+    	output[1][1] = Math.floorMod(output[1][1], 27);
+    	
+        return output;
+    }
+    
 }
